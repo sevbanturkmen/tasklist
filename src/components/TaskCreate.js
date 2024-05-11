@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from "react";
+import TasksContext from "../hooks/useTasksContext";
 
-function TaskCreate({ onCreate, task, taskformUpdate, onUpdate }) {
-  const [title, setTitle] = useState(task ? task.title : '');
-  const [taskDesc, setTaskDesc] = useState(task ? task.taskDesc : '');
+function TaskCreate({ task, taskformUpdate, onUpdate }) {
+  const { onCreate } = useContext(TasksContext);
+  const [title, setTitle] = useState(task ? task.title : "");
+  const [taskDesc, setTaskDesc] = useState(task ? task.taskDesc : "");
 
   const handleChange = (event) => {
     setTitle(event.target.value);
@@ -18,13 +20,12 @@ function TaskCreate({ onCreate, task, taskformUpdate, onUpdate }) {
       onCreate(title, taskDesc);
     }
 
-    setTitle('');
-    setTaskDesc('');
+    setTitle("");
+    setTaskDesc("");
   };
 
   return (
     <div>
-      {' '}
       {taskformUpdate ? (
         <div className="task-update">
           <h3>Lütfen Taskı Düzenleyiniz!</h3>

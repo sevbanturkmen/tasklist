@@ -1,8 +1,11 @@
-import { useState } from 'react';
-import TaskCreate from './TaskCreate';
+import { useContext, useState } from "react";
+import TaskCreate from "./TaskCreate";
+import TasksContext from "../hooks/useTasksContext";
 
-function TaskShow({ task, onDelete, onUpdate }) {
+function TaskShow({ task }) {
+  const { onDelete, onUpdate } = useContext(TasksContext);
   const [showEdit, setShowEdit] = useState(false);
+
   const handleDeleteClick = () => {
     onDelete(task.id);
   };
@@ -14,7 +17,6 @@ function TaskShow({ task, onDelete, onUpdate }) {
     onUpdate(id, updatedTitle, updatedTaskDesc);
   };
 
-  // console.log(task);
   return (
     <div className="task-show">
       {showEdit ? (
